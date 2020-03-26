@@ -39,8 +39,8 @@ echo "arch" > /etc/hostname
 echo -e "${_g}==> Inserindo dados em /etc/hosts${_o}"; sleep 1
 echo -e "127.0.0.1\tlocalhost.localdomain\tlocalhost\n::1\tlocalhost.localdomain\tlocalhost\n127.0.1.1\tarch.localdomain\tarch\n" > /etc/hosts
 
-echo -e "${_g}==> Habilitando Multilib${_o}"; sleep 1
-echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" >> /etc/pacman.conf
+# echo -e "${_g}==> Habilitando Multilib${_o}"; sleep 1
+# echo -e "\n[multilib]\nInclude = /etc/pacman.d/mirrorlist\n" >> /etc/pacman.conf
 
 echo -e "${_g}==> Criando grupo wheel${_o}"; sleep 1
 echo -e "%wheel ALL=(ALL) ALL\n" >> /etc/sudoers
@@ -73,10 +73,14 @@ pacman -S dialog wget nano --noconfirm # remove dhclient dhcpcd
 
 # grub configuration
 if [[ "$_uefi" != "" ]]; then
-	echo -e "${_g}==> bootctl UEFI mode${_o}"
-	bootctl --path=/boot install
-	echo -e "default arch\ntimeout 5\n" > /boot/loader/loader.conf
-	echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${_root} rw\n" > /boot/loader/entries/arch.conf
+	# echo -e "${_g}==> bootctl UEFI mode${_o}"
+	# bootctl --path=/boot install
+	# echo -e "default arch\ntimeout 5\n" > /boot/loader/loader.conf
+	# echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${_root} rw\n" > /boot/loader/entries/arch.conf
+	echo -e "${_g}==> Instalação grub UEFI mode${_o}"
+	pacman -S efibootmgr grub --noconfirm;
+	grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+	grub-mkconfig -o /boot/grub/grub.cfg
 else
 	echo -e "${_g}==> Instalando e Configurando o GRUB${_o}"
 	pacman -S grub --noconfirm
