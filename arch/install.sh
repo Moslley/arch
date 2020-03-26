@@ -68,14 +68,14 @@ echo "==========================================================="
 
 echo -e "\n${_n} CONSULTE ACIMA O NÚMERO DAS SUAS PARTIÇÕES${_o}"
 
-echo -en "\n ${_p}Digite o número da partição${_o} ${_g}UEFI${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _uefiNumber; export _uefiNumber;
+echo -en "\n ${_p}Digite o número da partição${_o} ${_g}UEFI${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _uefi;
 echo -en "\n ${_p}Digite o número da partição${_o} ${_g}SWAP${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _swap
 echo -en "\n ${_p}Digite o número da partição${_o} ${_g}RAÍZ /${_o}${_am} (Partição OBRIGATÓRIA!)${_o}:${_w} "		 ; read  _root
 [ "$_root" == "" ] && { echo -e "\n${_am}Atenção:${_o} ${_p}Partição RAÍZ é obrigatória! Execute novamente o script e digite o número correto!\n${_o}"; exit 1; }
 echo -en "\n${_p} Digite o número da partição${_o} ${_g}HOME${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _home
 
 _root="/dev/${_disk}${_root}"; export _root
-[ -n "$_uefi" ] && { _uefi="/dev/${_disk}${_uefiNumber}"; export _uefi; }
+[ -n "$_uefi" ] && { _uefi="/dev/${_disk}${_uefi}"; export _uefi; }
 [ -n "$_swap" ] && { _swap="/dev/${_disk}${_swap}"; export _swap; }
 [ -n "$_home" ] && { _home="/dev/${_disk}${_home}"; export _home; }
 
