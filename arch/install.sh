@@ -172,7 +172,7 @@ fi
 # efi
 if [[ "$_uefi" != "" ]]; then
 	echo -e "${_g}Formatando, Criando e Montando EFI${_o}"; sleep 1
-	mkfs.fat -F32 $_uefi && mkdir /boot/efi && mount $_uefi /boot/efi
+	mkfs.fat -F32 $_uefi && mkdir -p /mnt/boot/efi && mount $_uefi /mnt/boot/efi
 fi
 
 # set morrorlist br (opcional)
