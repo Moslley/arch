@@ -73,14 +73,10 @@ pacman -S dialog wget nano --noconfirm # remove dhclient dhcpcd
 
 # grub configuration
 if [[ "$_uefi" != "" ]]; then
-	# echo -e "${_g}==> bootctl UEFI mode${_o}"
-	# bootctl --path=/boot install
-	# echo -e "default arch\ntimeout 5\n" > /boot/loader/loader.conf
-	# echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${_root} rw\n" > /boot/loader/entries/arch.conf
-	echo -e "${_g}==> Instalação grub UEFI mode${_o}"
-	pacman -S efibootmgr grub --noconfirm;
-	grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
-	grub-mkconfig -o /boot/grub/grub.cfg
+	echo -e "${_g}==> bootctl UEFI mode${_o}"
+	bootctl --path=/boot install
+	echo -e "default arch\ntimeout 3\n" > /boot/loader/loader.conf
+	echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${_root} rw\n" > /boot/loader/entries/arch.conf
 else
 	echo -e "${_g}==> Instalando e Configurando o GRUB${_o}"
 	pacman -S grub --noconfirm
