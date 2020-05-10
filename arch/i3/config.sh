@@ -18,7 +18,14 @@ sed -i 's/status_command i3status/status_command i3blocks -c ~\/.config\/i3\/i3b
 
 # i3blocks config
 mkdir -p ~/.config/i3/i3blocks/
-curl -s -o ~/.config/i3/config/i3blocks.conf 'https://raw.githubusercontent.com/leoarch/arch-linux/master/i3/i3blocks.conf'
+curl -s -o ~/.config/i3/config/i3blocks.conf 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/i3blocks.conf'
+curl -s -o ~/.config/i3/config/temperature 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/temperature'
+curl -s -o ~/.config/i3/config/shutdown_menu 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/shutdown_menu'
+curl -s -o ~/.config/i3/config/memory 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/memory'
+curl -s -o ~/.config/i3/config/cpu_usage 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/cpu_usage'
+curl -s -o ~/.config/i3/config/battery 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/battery'
+curl -s -o ~/.config/i3/config/bandwidth 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/bandwidth'
+curl -s -o ~/.config/i3/config/audio 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/audio'
 
 # gaps
 echo -e '# gaps\nfor_window [class="^.*"] border pixel 2\ngaps inner 10\ngaps outer 10\n' >> ~/.config/i3/config
