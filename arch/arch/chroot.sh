@@ -39,14 +39,18 @@ echo "arch" > /etc/hostname
 echo -e "${_g}==> Inserindo dados em /etc/hosts${_o}"; sleep 1
 echo -e "127.0.0.1\tlocalhost.localdomain\tlocalhost\n::1\tlocalhost.localdomain\tlocalhost\n127.0.1.1\tarch.localdomain\tarch\n" > /etc/hosts
 
-sed -i 's/# \[Multilib\]/\[Multilib\]/' ~/Documentos/testes/multilib.conf
-sed -i 's/# Include \= \/etc\/pacman.d\/mirrorlist/Include \= \/etc\/pacman.d\/mirrorlist/' ~/Documentos/testes/multilib.conf 
-
-echo -e "${_g}==> Criando grupo wheel${_o}"; sleep 1
-echo -e "%wheel ALL=(ALL) ALL\n" >> /etc/sudoers
+sed -i 's/# \[Multilib\]/\[Multilib\]/' /etc/pacman.conf
+sed -i 's/# Include \= \/etc\/pacman.d\/mirrorlist/Include \= \/etc\/pacman.d\/mirrorlist/' /etc/pacman.conf
 
 echo -e "${_g}==> Gerando Locale${_o}"
 locale-gen
+
+echo -e "${_g}==> Sincronizando a base de dados${_o}"; sleep 1
+pacman -Syu --noconfirm
+
+# no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
+echo -e "${_g}==> Instalando dhclient${_o}"
+pacman -S sudo dialog wget nano --noconfirm # remove dhclient dhcpcd
 
 # password
 echo -e "${_g}==> Criando senha root${_o}"
@@ -64,12 +68,8 @@ $_puser
 EOF
 sleep 0.5
 
-echo -e "${_g}==> Sincronizando a base de dados${_o}"; sleep 1
-pacman -Syu --noconfirm
-
-# no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
-echo -e "${_g}==> Instalando dhclient${_o}"
-pacman -S dhcpcd dialog wget nano --noconfirm # remove dhclient dhcpcd
+echo -e "${_g}==> Criando grupo wheel${_o}"; sleep 1
+echo -e "%wheel ALL=(ALL) ALL\n" >> /etc/sudoers
 
 # grub configuration
 if [[ "$_uefi" != "" ]]; then

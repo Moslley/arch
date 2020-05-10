@@ -68,7 +68,7 @@ echo "==========================================================="
 
 echo -e "\n${_n} CONSULTE ACIMA O NÚMERO DAS SUAS PARTIÇÕES${_o}"
 
-echo -en "\n ${_p}Digite o número da partição${_o} ${_g}UEFI${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _uefi;
+echo -en "\n ${_p}Digite o número da partição${_o} ${_g}UEFI${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _uefi
 echo -en "\n ${_p}Digite o número da partição${_o} ${_g}SWAP${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _swap
 echo -en "\n ${_p}Digite o número da partição${_o} ${_g}RAÍZ /${_o}${_am} (Partição OBRIGATÓRIA!)${_o}:${_w} "		 ; read  _root
 [ "$_root" == "" ] && { echo -e "\n${_am}Atenção:${_o} ${_p}Partição RAÍZ é obrigatória! Execute novamente o script e digite o número correto!\n${_o}"; exit 1; }
@@ -172,7 +172,7 @@ fi
 # efi
 if [[ "$_uefi" != "" ]]; then
 	echo -e "${_g}Formatando, Criando e Montando EFI${_o}"; sleep 1
-	mkfs.fat -F32 $_uefi && mkdir /mnt/boot && mount $_uefi /mnt/boot
+	mkfs.vfat -F32 $_uefi && mkdir /mnt/boot && mount $_uefi /mnt/boot
 fi
 
 # set morrorlist br (opcional)
@@ -181,7 +181,7 @@ fi
 
 # instalando base e base-devel
 echo -e "${_g}==> Instalando base/base-devel${_o}"; sleep 1
-pacstrap /mnt base base-devel linux linux-firmware
+pacstrap /mnt base linux linux-firmware
 
 # gerando fstab
 echo -e "${_g}==> Gerando FSTAB${_o}"; sleep 1
@@ -189,7 +189,7 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 
 # download script mode chroot
 echo -e "${_g}==> Baixando script para ser executado como chroot${_o}"; sleep 1
-wget https://raw.githubusercontent.com/l30br/arch/master/arch/chroot.sh && chmod +x chroot.sh && mv chroot.sh /mnt
+wget https://raw.githubusercontent.com/leoarch/arch/master/arch/chroot.sh && chmod +x chroot.sh && mv chroot.sh /mnt
 
 # run script
 echo -e "${_g}==> Executando script${_o}"; sleep 1
