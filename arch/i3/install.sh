@@ -41,7 +41,7 @@ else
 fi
 
 echo -e "${_g}==> Instando xorg${_e}"; sleep 1
-pacman -S xorg-xinit xorg-server xf86-input-keyboard xf86-input-mouse xf86-video-vesa --noconfirm
+pacman -S xorg xorg-xinit xorg-server xf86-video-vesa --noconfirm
 
 if [[ "$_notebook" == "s" ]]; then # notebook
 	echo -e "${_g}==> Instalando drivers para notebook${_e}"; sleep 1
@@ -57,14 +57,14 @@ echo -e "${_g}==> Pacotes essenciais${_e}"; sleep 1
 pacman -S ttf-dejavu terminus-font termite gvfs sudo --noconfirm
 
 echo -e "${_g}==> Instalando i3${_e}"; sleep 1
-pacman -S i3-gaps i3status --noconfirm
+pacman -S i3-gaps i3blocks --noconfirm
 
 # echo -e "${_g}==> Instalando thunar e plugins${_e}"; sleep 1
 # pacman -S thunar thunar-volman thunar-archive-plugin  --noconfirm
 
 # firefox
-# echo -e "${_g}==> Instalando firefox${_e}"; sleep 1
-# pacman -S firefox firefox-i18n-pt-br flashplugin --noconfirm
+echo -e "${_g}==> Instalando firefox${_e}"; sleep 1
+pacman -S firefox firefox-i18n-pt-br --noconfirm
 
 # audio renove pavucontrol
 echo -e "${_g}==> Instalando audio${_e}"; sleep 1
