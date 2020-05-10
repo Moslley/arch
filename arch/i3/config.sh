@@ -7,7 +7,7 @@
 ##############
 
 echo -e "${_g}==> Instalando utilitários${_e}"; sleep 1 # mude de acordo com suas necessidades xorg-xinput
-sudo pacman -S calc flatpak git rofi flameshot feh chromium zip unzip unrar transmission-cli compton --noconfirm
+sudo pacman -S calc flatpak git rofi flameshot feh chromium zip unzip unrar transmission-cli --noconfirm
 
 ################
 ### i3config ###
@@ -42,6 +42,9 @@ echo -e '# network-manager\nexec --no-startup-id nm-applet\n' >> ~/.config/i3/co
 
 # rofi
 sed -i 's/dmenu_run/rofi -show drun/' ~/.config/i3/config
+mkdir -p ~/.config/rofi
+curl -s -o ~/.config/i3/rofi/config ''
+curl -s -o ~/.config/i3/rofi/android_notification ''
 
 # mouse acceleration
 echo -e '# mouse acceleration\nexec --no-startup-id xinput --set-prop 8 'libinput Accel Speed' -0.45\n' >> ~/.config/i3/config
@@ -56,9 +59,9 @@ echo -e '# feh\nexec --no-startup-id feh --bg-scale /home/leo/Imagens/wallpaper/
 echo -e '# window size\nfor_window [window_role="GtkFileChooserDialog"] floating enable resize set 800 px 600 px, move position center focusn' >> ~/.config/i3/config
 
 # compton config
-mkdir -p ~/.config/compton && cd ~/.config/compton
-wget https://raw.githubusercontent.com/leoarch/arch/master/i3/config/compton.conf
-echo -e '# compton config\nexec --no-startup-id compton --config /home/leo/.config/compton/compton.conf\n' >> ~/.config/i3/config
+# mkdir -p ~/.config/compton && cd ~/.config/compton
+# wget https://raw.githubusercontent.com/leoarch/arch/master/i3/config/compton.conf
+# echo -e '# compton config\nexec --no-startup-id compton --config /home/leo/.config/compton/compton.conf\n' >> ~/.config/i3/config
 
 #sudo ln -s /opt/sublime_text/sublime_text /usr/bin/
 #obs
