@@ -7,7 +7,7 @@
 ##############
 
 echo -e "${_g}==> Instalando utilitários${_e}"; sleep 1 # mude de acordo com suas necessidades xorg-xinput
-sudo pacman -S calc flatpak git rofi flameshot feh chromium zip unzip unrar transmission-cli --noconfirm
+sudo pacman -S calc flatpak git rofi flameshot feh chromium zip unzip unrar ttf-font-awesome --noconfirm
 
 ################
 ### i3config ###
@@ -18,14 +18,14 @@ sed -i 's/status_command i3status/status_command i3blocks -c ~\/.config\/i3\/i3b
 
 # i3blocks config
 mkdir -p ~/.config/i3/i3blocks/
-curl -s -o ~/.config/i3/config/i3blocks.conf 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/i3blocks.conf'
-curl -s -o ~/.config/i3/config/temperature 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/temperature'
-curl -s -o ~/.config/i3/config/shutdown_menu 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/shutdown_menu'
-curl -s -o ~/.config/i3/config/memory 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/memory'
-curl -s -o ~/.config/i3/config/cpu_usage 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/cpu_usage'
-curl -s -o ~/.config/i3/config/battery 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/battery'
-curl -s -o ~/.config/i3/config/bandwidth 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/bandwidth'
-curl -s -o ~/.config/i3/config/audio 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/audio'
+curl -s -o ~/.config/i3/i3blocks/i3blocks.conf 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/i3blocks.conf'
+curl -s -o ~/.config/i3/i3blocks/temperature 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/temperature'
+curl -s -o ~/.config/i3/i3blocks/shutdown_menu 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/shutdown_menu'
+curl -s -o ~/.config/i3/i3blocks/memory 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/memory'
+curl -s -o ~/.config/i3/i3blocks/cpu_usage 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/cpu_usage'
+curl -s -o ~/.config/i3/i3blocks/battery 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/battery'
+curl -s -o ~/.config/i3/i3blocks/bandwidth 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/bandwidth'
+curl -s -o ~/.config/i3/confi3blocksig/audio 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/i3blocks/audio'
 
 # gaps
 echo -e '# gaps\nfor_window [class="^.*"] border pixel 2\ngaps inner 10\ngaps outer 10\n' >> ~/.config/i3/config
