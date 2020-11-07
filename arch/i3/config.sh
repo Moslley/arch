@@ -7,7 +7,7 @@
 ##############
 
 echo -e "${_g}==> Instalando utilitários${_e}"; sleep 1 # mude de acordo com suas necessidades xorg-xinput
-sudo pacman -S calc flatpak git rofi flameshot feh chromium zip unzip unrar ttf-font-awesome --noconfirm
+sudo pacman -S calc flatpak git rofi flameshot feh chromium zip unzip unrar ttf-font-awesome geany --noconfirm
 
 ################
 ### i3config ###
