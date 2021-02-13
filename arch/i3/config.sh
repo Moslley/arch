@@ -8,6 +8,14 @@
 
 echo -e "${_g}==> Instalando utilitários${_e}"; sleep 1 # mude de acordo com suas necessidades xorg-xinput
 sudo pacman -S calc flatpak git rofi flameshot feh chromium zip unzip unrar ttf-font-awesome geany thunar --noconfirm
+sudo pacman -S base-devel transmission-gtk --noconfirm # binutils fakeroot
+
+# instalando yay
+
+# nordvpn
+# sudo systemctl enable nordvpnd
+# sudo gpasswd -a leo nordvpn
+# sudo nordvpn login ou connect
 
 ################
 ### i3config ###
