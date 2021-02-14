@@ -40,7 +40,7 @@ cd ~/.config/i3/i3blocks/
 chmod +x temperature shutdown_menu memory cpu_usage battery bandwidth audio
 
 # gaps
-echo -e '# gaps\nfor_window [class="^.*"] border pixel 2\ngaps inner 10\ngaps outer 10\n' >> ~/.config/i3/config
+echo -e '\n# gaps\nfor_window [class="^.*"] border pixel 2\ngaps inner 10\ngaps outer 10\n' >> ~/.config/i3/config
 
 # google-chrome
 # echo -e '\n\n# chrome\nbindsym $mod+Shift+b exec --no-startup-id google-chrome-stable\nfor_window [class="chrome"] move to workspace $ws2\nassign [class="^chrome"] $ws2\n' >> ~/.config/i3/config
