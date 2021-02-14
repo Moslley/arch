@@ -70,6 +70,9 @@ echo -e '# feh\nexec --no-startup-id feh --bg-scale /home/leo/Imagens/wallpaper/
 # window size
 echo -e '# window size\nfor_window [window_role="GtkFileChooserDialog"] floating enable resize set 800 px 600 px, move position center focusn' >> ~/.config/i3/config
 
+# xrand monitor resolution
+# exec --no-startup-id xrandr --output Virtual1 --mode 1280x800
+
 # compton config
 # mkdir -p ~/.config/compton && cd ~/.config/compton
 # wget https://raw.githubusercontent.com/leoarch/arch/master/i3/config/compton.conf
