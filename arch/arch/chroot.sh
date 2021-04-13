@@ -93,7 +93,7 @@ if [[ "$_notebook" == "s" ]]; then
 fi
 
 echo -e "${_g}==> mkinitcpio${_o}"
-mkinitcpio -p linux
+mkinitcpio -p linux-lts
 
 echo -e "${_g}==> Fim do script chroot.sh${_o}"
 
