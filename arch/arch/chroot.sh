@@ -39,8 +39,10 @@ echo "arch" > /etc/hostname
 echo -e "${_g}==> Inserindo dados em /etc/hosts${_o}"; sleep 1
 echo -e "127.0.0.1\tlocalhost.localdomain\tlocalhost\n::1\tlocalhost.localdomain\tlocalhost\n127.0.1.1\tarch.localdomain\tarch\n" > /etc/hosts
 
-sed -i 's/# \[Multilib\]/\[Multilib\]/' /etc/pacman.conf
-sed -i 's/# Include \= \/etc\/pacman.d\/mirrorlist/Include \= \/etc\/pacman.d\/mirrorlist/' /etc/pacman.conf
+#sed -i 's/# \[Multilib\]/\[Multilib\]/' /etc/pacman.conf
+#sed -i 's/# Include \= \/etc\/pacman.d\/mirrorlist/Include \= \/etc\/pacman.d\/mirrorlist/' /etc/pacman.conf
+
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
 echo -e "${_g}==> Gerando Locale${_o}"
 locale-gen
