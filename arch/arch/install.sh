@@ -91,6 +91,10 @@ echo -en "${_g}Você está instalando em um notebook? Didigte s para (Sim) ou n 
 [[ "$_notebook" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
 export _notebook
 
+echo -en "\n${_g}Gostaria de instalar o ambiente gráfico GNOME?${_o} (Digite a letra 's' para sim ou 'n' para não):${_w} "; read  _gnome
+[[ "$_gnome" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
+export _gnome
+
 tput reset
 
 cat <<STI
