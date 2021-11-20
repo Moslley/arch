@@ -50,6 +50,11 @@ locale-gen
 echo -e "${_g}==> Sincronizando a base de dados${_o}"; sleep 1
 pacman -Syu --noconfirm
 
+# install gnome
+if [[ "$_gnome" == @(S|s) ]]; then
+	pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g gedit --noconfirm
+fi
+
 # no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
 echo -e "${_g}==> Instalando dhclient${_o}"
 pacman -S sudo dialog wget nano dhcpcd --noconfirm # remove dhclient
