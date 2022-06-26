@@ -53,7 +53,7 @@ fi
 
 # firefox
 echo -e "${_g}===> Instalando firefox${_o}"; sleep 1
-pacman -S firefox firefox-i18n-pt-br flashplugin --noconfirm
+pacman -S firefox firefox-i18n-pt-br --noconfirm
 
 # rede
 echo -e "${_g}===> Instalando utilitários de rede${_o}"; sleep 1
@@ -62,6 +62,8 @@ pacman -S networkmanager network-manager-applet --noconfirm
 # audio
 echo -e "${_g}===> Instalando utilitários${_o}"; sleep 1
 pacman -S alsa-utils unrar zip unzip gnome-calculator --noconfirm
+echo -e "${_g}===> Instalando utilitários pessoais${_o}"; sleep 1
+pacman -S flatpak wine git transmission-gtk telegram-desktop neofetch cmatrix youtube-dl vlc eog filezilla evince remmina --noconfirm
 
 # mudar dhcpcd para dhclient (em um caso particular, meu roteador só funcionou com dhclient)
 # echo -e "${_g}===> Configurando dhcp para dhclient${_o}"; sleep 1
