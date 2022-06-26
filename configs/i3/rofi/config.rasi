@@ -1,0 +1,49 @@
+//@theme "/usr/share/rofi/themes/android_notification.rasi"
+@theme "/usr/share/rofi/themes/android_notification.rasi"
+
+configuration {
+	display-drun: "Aplicação";
+	display-window: "Windows";
+	drun-display-format: "{name}";
+	font: "JetBrainsMono Nerd Font Medium 10";
+	modi: "window,run,drun";
+	icon-theme: "Papirus"; 
+	show-icons: true;
+}
+
+listview {
+  padding: 8 12;
+  background-color: @bg;
+  columns: 1;
+  lines: 8;
+}
+
+window {
+  width: 30%;
+}
+
+element {
+  padding: 5 0;
+  text-color: @fg-alt;
+}
+
+element selected {
+  text-color: @fg;
+}
+
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 20;
+}
+
+listview {
+  padding: 8 12;
+  background-color: @bg;
+  columns: 1;
+  lines: 8;
+}
