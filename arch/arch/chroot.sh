@@ -52,7 +52,10 @@ pacman -Syu --noconfirm
 
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
-pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd --noconfirm	
+pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus \\
+          gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar \\
+	  ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd \\
+	  --noconfirm	
 
 # enable services
 echo -e "${_g}===> Habilitando NetworkManager e GDM${_o}"; sleep 1
