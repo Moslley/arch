@@ -52,7 +52,7 @@ pacman -Syu --noconfirm
 
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
-	pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g gedit --noconfirm
+pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog --noconfirm	
 fi
 
 # no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
