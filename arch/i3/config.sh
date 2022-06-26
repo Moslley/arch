@@ -59,7 +59,7 @@ echo -e '# network-manager\nexec --no-startup-id nm-applet\n' >> ~/.config/i3/co
 # rofi
 sed -i 's/dmenu_run/rofi -show drun/' ~/.config/i3/config
 mkdir -p ~/.config/rofi
-curl -s -o ~/.config/rofi/config 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/rofi/config'
+curl -s -o ~/.config/rofi/config.rasi 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/rofi/config.rasi'
 curl -s -o ~/.config/rofi/android_notification.rasi 'https://raw.githubusercontent.com/Moslley/arch/master/configs/i3/rofi/android_notification.rasi'
 
 # mouse acceleration
