@@ -91,6 +91,10 @@ echo -en "${_g}Você está instalando em um notebook? Didigte s para (Sim) ou n 
 [[ "$_notebook" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
 export _notebook
 
+echo -en "${_g}Você deseja instalar o kernel LTS? Didigte s para (Sim) ou n para (Não):${_o}${_w} "; read _kernelLTS
+[[ "$_kernelLTS" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
+export _kernelLTS
+
 echo -en "\n${_g}Gostaria de instalar o ambiente gráfico GNOME?${_o} (Digite a letra 's' para sim ou 'n' para não):${_w} "; read  _gnome
 [[ "$_gnome" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
 export _gnome
@@ -184,8 +188,14 @@ fi
 # wget "https://raw.githubusercontent.com/leoarch/arch/master/arch/mirrorlist" -O /etc/pacman.d/mirrorlist 2>/dev/null
 
 # instalando base e base-devel
-echo -e "${_g}==> Instalando base/base-devel${_o}"; sleep 1
-pacstrap /mnt base linux-lts linux-firmware
+echo -e "${_g}==> Instalando kernel e base/base-devel${_o}"; sleep 1
+if [[ "$_kernelLTS" == "s" ]]; then
+	echo -e "${_g}==> Instalando kernel LTS${_o}"; sleep 1
+	pacstrap /mnt base linux-lts linux-firmware
+else
+	pacstrap /mnt base linux linux-firmware
+fi
+
 
 # gerando fstab
 echo -e "${_g}==> Gerando FSTAB${_o}"; sleep 1
