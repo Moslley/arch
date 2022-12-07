@@ -99,6 +99,10 @@ echo -en "\n${_g}Gostaria de instalar o ambiente gráfico GNOME?${_o} (Digite a 
 [[ "$_gnome" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
 export _gnome
 
+echo -en "\n${_g}Gostaria de instalar o gerenciador de janelas i3?${_o} (Digite a letra 's' para sim ou 'n' para não):${_w} "; read  _i3
+[[ "$_i3" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
+export _i3
+
 tput reset
 
 cat <<STI
