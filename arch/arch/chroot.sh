@@ -50,6 +50,29 @@ locale-gen
 echo -e "${_g}==> Sincronizando a base de dados${_o}"; sleep 1
 pacman -Syu --noconfirm
 
+# no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
+echo -e "${_g}==> Instalando dhclient${_o}"
+pacman -S sudo dialog wget nano dhcpcd --noconfirm # remove dhclient
+
+# password
+echo -e "${_g}==> Criando senha root${_o}"
+passwd << EOF
+$_proot
+$_proot
+EOF
+sleep 0.5
+
+echo -e "${_g}==> Criando senha user${_o}"
+useradd -m -g users -G wheel -s /bin/bash $_user
+passwd $_user << EOF
+$_puser
+$_puser
+EOF
+sleep 0.5
+
+echo -e "${_g}==> Criando grupo wheel${_o}"; sleep 1
+echo -e "%wheel ALL=(ALL) ALL\n" >> /etc/sudoers
+
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
 pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus \\
@@ -68,7 +91,7 @@ if [[ "$_i3" == @(S|s) ]]; then
 	pacman -S i3-wm xorg xorg-xinit xorg-server xf86-video-vesa --noconfirm
 	
 	echo -e "${_g}==> Pacotes essenciais${_e}"; sleep 1
-	pacman -S ttf-dejavu terminus-font termite gvfs sudo --noconfirm
+	pacman -S ttf-dejavu terminus-font xterm gvfs sudo --noconfirm
 	
 	# firefox
 	echo -e "${_g}==> Instalando firefox${_e}"; sleep 1
@@ -111,29 +134,6 @@ if [[ "$_i3" == @(S|s) ]]; then
 	echo -e "${_g}==> Habilitando serviços para serem iniciados com o sistema${_e}"; sleep 1
 	systemctl enable lightdm && systemctl enable NetworkManager
 fi
-
-# no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
-echo -e "${_g}==> Instalando dhclient${_o}"
-pacman -S sudo dialog wget nano dhcpcd --noconfirm # remove dhclient
-
-# password
-echo -e "${_g}==> Criando senha root${_o}"
-passwd << EOF
-$_proot
-$_proot
-EOF
-sleep 0.5
-
-echo -e "${_g}==> Criando senha user${_o}"
-useradd -m -g users -G wheel -s /bin/bash $_user
-passwd $_user << EOF
-$_puser
-$_puser
-EOF
-sleep 0.5
-
-echo -e "${_g}==> Criando grupo wheel${_o}"; sleep 1
-echo -e "%wheel ALL=(ALL) ALL\n" >> /etc/sudoers
 
 # grub configuration
 if [[ "$_uefi" != "" ]]; then
