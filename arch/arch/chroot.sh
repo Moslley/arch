@@ -55,7 +55,58 @@ if [[ "$_gnome" == @(S|s) ]]; then
 pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus \\
           gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar \\
 	  ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd \\
-	  --noconfirm	
+	  --noconfirm
+	  
+# install i3wm
+if [[ "$_i3" == @(S|s) ]]; then
+	echo -e "${_g}==> Instaçando i3wm e xorg${_e}"; sleep 1
+	pacman -S i3-wm xorg xorg-xinit xorg-server xf86-video-vesa --noconfirm
+	
+	echo -e "${_g}==> Pacotes essenciais${_e}"; sleep 1
+	pacman -S ttf-dejavu terminus-font termite gvfs sudo --noconfirm
+	
+	# firefox
+	echo -e "${_g}==> Instalando firefox${_e}"; sleep 1
+	pacman -S firefox firefox-i18n-pt-br --noconfirm
+	
+	# audio renove pavucontrol
+	echo -e "${_g}==> Instalando audio${_e}"; sleep 1
+	pacman -S alsa-utils pulseaudio --noconfirm
+
+	# network
+	echo -e "${_g}==> Instalando utilitários de rede${_e}"; sleep 1
+	pacman -S networkmanager network-manager-applet --noconfirm
+
+	# criar diretórios
+	echo -e "${_g}==> Criando diretórios${_e}"; sleep 1
+	pacman -S xdg-user-dirs --noconfirm && xdg-user-dirs-update
+
+	# iniciar i3
+	echo -e "${_g}==> Configurando pra iniciar o i3${_e}"; sleep 1
+	echo 'exec i3' > /home/${_user}/.xinitrc
+
+	# keyboard X11 br abnt2
+	echo -e "${_g}==> Setando keymap br abnt2 no ambiente X11${_e}"; sleep 1
+	localectl set-x11-keymap br abnt2
+
+	# keyboard
+	echo -e "${_g}==> Criando arquivo de configuração para keyboard br abnt${_e}"; sleep 1
+	curl -s -o /etc/X11/xorg.conf.d/10-evdev.conf 'https://raw.githubusercontent.com/leoarch/arch/master/xfce/config/keyboard'
+
+	# configurando e instalando lightdm
+	echo -e "${_g}==> Instalando e configurando gerenciador de login lightdm${_e}"; sleep 1
+	pacman -S lightdm lightdm-gtk-greeter --noconfirm
+	echo -e "${_g}==> Configurando gerenciador de login lightdm${_o}"; sleep 1
+	sed -i 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf
+	sed -i '/^#greeter-hide-user=/s/#//' /etc/lightdm/lightdm.conf
+	curl -s -o /usr/share/pixmaps/arch-01.jpg 'https://raw.githubusercontent.com/leoarch/arch/master/xfce/images/arch-01.jpg'
+	echo -e "[greeter]\nbackground=/usr/share/pixmaps/arch-01.jpg" > /etc/lightdm/lightdm-gtk-greeter.conf
+
+	# enable services
+	echo -e "${_g}==> Habilitando serviços para serem iniciados com o sistema${_e}"; sleep 1
+	systemctl enable lightdm
+	systemctl enable NetworkManager
+fi
 
 # enable services
 echo -e "${_g}===> Habilitando NetworkManager e GDM${_o}"; sleep 1
@@ -103,7 +154,12 @@ fi
 
 if [[ "$_notebook" == "s" ]]; then
 	echo -e "${_g}==> Instalando drivers para notebook${_o}"; sleep 1
-	pacman -S netctl wireless_tools wpa_supplicant acpi acpid --noconfirm # remove the repository (wpa_actiond)
+	pacman -S netctl wireless_tools wpa_supplicant acpi acpid \\
+	xf86-input-synaptics xf86-input-libinput \\
+	--noconfirm # remove the repository (wpa_actiond)
+	
+	echo -e "${_g}==> Configurando tap-to-click${_e}"; sleep 1
+	curl -s -o /etc/X11/xorg.conf.d/30-touchpad.conf 'https://raw.githubusercontent.com/leoarch/arch/master/xfce/config/touchpad'
 fi
 
 echo -e "${_g}==> mkinitcpio${_o}"
