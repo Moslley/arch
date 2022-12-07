@@ -53,9 +53,14 @@ pacman -Syu --noconfirm
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
 pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus \\
-          gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar \\
-	  ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd \\
-	  --noconfirm
+	gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar \\
+	ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd \\
+	--noconfirm
+
+	# enable services
+	echo -e "${_g}===> Habilitando NetworkManager e GDM${_o}"; sleep 1
+	systemctl enable NetworkManager && systemctl enable gdm
+fi
 	  
 # install i3wm
 if [[ "$_i3" == @(S|s) ]]; then
@@ -104,13 +109,7 @@ if [[ "$_i3" == @(S|s) ]]; then
 
 	# enable services
 	echo -e "${_g}==> Habilitando serviços para serem iniciados com o sistema${_e}"; sleep 1
-	systemctl enable lightdm
-	systemctl enable NetworkManager
-fi
-
-# enable services
-echo -e "${_g}===> Habilitando NetworkManager e GDM${_o}"; sleep 1
-systemctl enable NetworkManager && systemctl enable gdm
+	systemctl enable lightdm && systemctl enable NetworkManager
 fi
 
 # no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
