@@ -47,6 +47,9 @@ sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 echo -e "${_g}==> Gerando Locale${_o}"
 locale-gen
 
+echo -e "${_g}==> pacman-key${_o}"; sleep 1
+pacman-key --init && pacman-key --populate
+
 echo -e "${_g}==> Sincronizando a base de dados${_o}"; sleep 1
 pacman -Syu --noconfirm
 
@@ -75,7 +78,7 @@ echo -e "%wheel ALL=(ALL) ALL\n" >> /etc/sudoers
 
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
-pacman -S gnome-shell gnome-terminal gnome-control-center gnome-tweaks gdm nautilus \\
+pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus \\
 	gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar \\
 	ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd \\
 	--noconfirm
@@ -91,7 +94,7 @@ if [[ "$_i3" == @(S|s) ]]; then
 	pacman -S i3-wm xorg xorg-xinit xorg-server xf86-video-vesa --noconfirm
 	
 	echo -e "${_g}==> Pacotes essenciais${_e}"; sleep 1
-	pacman -S ttf-dejavu terminus-font xterm gvfs sudo --noconfirm
+	pacman -S ttf-dejavu terminus-font xterm gvfs --noconfirm
 	
 	# firefox
 	echo -e "${_g}==> Instalando firefox${_e}"; sleep 1
