@@ -47,9 +47,6 @@ sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 echo -e "${_g}==> Gerando Locale${_o}"
 locale-gen
 
-echo -e "${_g}==> pacman-key${_o}"; sleep 1
-pacman-key --init && pacman-key --populate
-
 echo -e "${_g}==> Sincronizando a base de dados${_o}"; sleep 1
 pacman -Syu --noconfirm
 
