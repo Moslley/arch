@@ -191,13 +191,16 @@ fi
 # echo -e "${_g}==> Setando mirrorlist BR${_o}"; sleep 1
 # wget "https://raw.githubusercontent.com/leoarch/arch/master/arch/mirrorlist" -O /etc/pacman.d/mirrorlist 2>/dev/null
 
+echo -e "${_g}==> pacman-key${_o}"; sleep 1
+pacman-key --init && pacman-key --populate
+
 # instalando base e base-devel
 echo -e "${_g}==> Instalando kernel e base/base-devel${_o}"; sleep 1
 if [[ "$_kernelLTS" == "s" ]]; then
 	echo -e "${_g}==> Instalando kernel LTS${_o}"; sleep 1
-	pacstrap /mnt base linux-lts linux-firmware
+	pacstrap -K /mnt base linux-lts linux-firmware
 else
-	pacstrap /mnt base linux linux-firmware
+	pacstrap -K /mnt base linux linux-firmware
 fi
 
 
