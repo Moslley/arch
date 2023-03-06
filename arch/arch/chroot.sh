@@ -75,11 +75,7 @@ echo -e "%wheel ALL=(ALL) ALL\n" >> /etc/sudoers
 
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
-pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus \\
-	gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar \\
-	ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd \\
-	--noconfirm
-
+	pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd --noconfirm
 	# enable services
 	echo -e "${_g}===> Habilitando NetworkManager e GDM${_o}"; sleep 1
 	systemctl enable NetworkManager && systemctl enable gdm
@@ -153,9 +149,7 @@ fi
 
 if [[ "$_notebook" == "s" ]]; then
 	echo -e "${_g}==> Instalando drivers para notebook${_o}"; sleep 1
-	pacman -S netctl wireless_tools wpa_supplicant acpi acpid \\
-	xf86-input-synaptics xf86-input-libinput \\
-	--noconfirm # remove the repository (wpa_actiond)
+	pacman -S netctl wireless_tools wpa_supplicant acpi acpid xf86-input-synaptics xf86-input-libinput --noconfirm # remove the repository (wpa_actiond)
 	
 	echo -e "${_g}==> Configurando tap-to-click${_e}"; sleep 1
 	curl -s -o /etc/X11/xorg.conf.d/30-touchpad.conf 'https://raw.githubusercontent.com/leoarch/arch/master/xfce/config/touchpad'
