@@ -87,16 +87,17 @@ if [[ "$_i3" == @(S|s) ]]; then
 	pacman -S i3-wm xorg xorg-xinit xorg-server xf86-video-vesa --noconfirm
 	
 	echo -e "${_g}==> Pacotes essenciais${_e}"; sleep 1
-	pacman -S ttf-dejavu terminus-font xterm gvfs --noconfirm
+	pacman -S ttf-dejavu terminus-font alacritty gvfs feh qalculate-gtk dmenu zip unzip unrar ntfs-3g --noconfirm
 	
 	# firefox
 	echo -e "${_g}==> Instalando firefox${_e}"; sleep 1
 	pacman -S firefox firefox-i18n-pt-br --noconfirm
 	
 	# audio renove pavucontrol
-	echo -e "${_g}==> Instalando audio${_e}"; sleep 1
-	pacman -S alsa-utils pulseaudio --noconfirm
-
+	echo -e "${_g}==> Instalando ulititários de áudio${_e}"; sleep 1
+	# pacman -S alsa-utils pulseaudio --noconfirm
+	pacman -S pipewire pipewire-pulse pipewire-alsa pipewire-jack --noconfirm
+	
 	# network
 	echo -e "${_g}==> Instalando utilitários de rede${_e}"; sleep 1
 	pacman -S networkmanager network-manager-applet --noconfirm
