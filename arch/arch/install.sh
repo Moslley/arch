@@ -103,6 +103,10 @@ echo -en "\n${_g}Gostaria de instalar o gerenciador de janelas i3?${_o} (Digite 
 [[ "$_i3" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
 export _i3
 
+echo -en "\n${_g}Gostaria de instalar o driver da nvidia?${_o} (Digite a letra 's' para sim ou 'n' para não):${_w} "; read  _nvidia
+[[ "$_nvidia" != @(s|n) ]] && { echo -e "\n${_am}Digite uma opção válida! s ou n\n${_o}"; exit 1; }
+export _nvidia
+
 tput reset
 
 cat <<STI
