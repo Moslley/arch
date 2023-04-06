@@ -44,25 +44,25 @@ echo -e "127.0.0.1\tlocalhost.localdomain\tlocalhost\n::1\tlocalhost.localdomain
 
 sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
-echo -e "${_g}==> Gerando Locale${_o}"
+echo -e "${_g}==> Gerando Locale${_o}"; sleep 1
 locale-gen
 
 echo -e "${_g}==> Sincronizando a base de dados${_o}"; sleep 1
 pacman -Syu --noconfirm
 
 # no meu caso, o dhclient funciona pro meu roteador e dhcpcd não (altere a vontade)
-echo -e "${_g}==> Instalando dhclient${_o}"
+echo -e "${_g}==> Instalando dhclient${_o}"; sleep 1
 pacman -S sudo dialog wget nano dhcpcd iwd --noconfirm # remove dhclient
 
 # password
-echo -e "${_g}==> Criando senha root${_o}"
+echo -e "${_g}==> Criando senha root${_o}"; sleep 1
 passwd << EOF
 $_proot
 $_proot
 EOF
 sleep 0.5
 
-echo -e "${_g}==> Criando senha user${_o}"
+echo -e "${_g}==> Criando senha user${_o}"; sleep 1
 useradd -m -g users -G wheel -s /bin/bash $_user
 passwd $_user << EOF
 $_puser
@@ -72,6 +72,12 @@ sleep 0.5
 
 echo -e "${_g}==> Criando grupo wheel${_o}"; sleep 1
 echo -e "%wheel ALL=(ALL) ALL\n" >> /etc/sudoers
+
+# install nvidia driver
+if [[ "$_nvidia" == @(S|s) ]]; then
+	echo -e "${_g}===> Instalando driver da nvidia${_o}"; sleep 1
+	pacman -S nvidia --noconfirm
+fi
 
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
@@ -83,43 +89,43 @@ fi
 	  
 # install i3wm
 if [[ "$_i3" == @(S|s) ]]; then
-	echo -e "${_g}==> Instaçando i3wm e xorg${_e}"; sleep 1
+	echo -e "${_g}==> Instaçando i3wm e xorg${_o}"; sleep 1
 	pacman -S i3-wm xorg xorg-xinit xorg-server xf86-video-vesa --noconfirm
 	
-	echo -e "${_g}==> Pacotes essenciais${_e}"; sleep 1
+	echo -e "${_g}==> Pacotes essenciais${_o}"; sleep 1
 	pacman -S ttf-dejavu terminus-font alacritty gvfs feh qalculate-gtk dmenu zip unzip unrar ntfs-3g thunar flatpak git flameshot geany --noconfirm
 	
 	# firefox
-	echo -e "${_g}==> Instalando firefox${_e}"; sleep 1
+	echo -e "${_g}==> Instalando firefox${_o}"; sleep 1
 	pacman -S firefox firefox-i18n-pt-br --noconfirm
 	
 	# audio renove pavucontrol
-	echo -e "${_g}==> Instalando ulititários de áudio${_e}"; sleep 1
+	echo -e "${_g}==> Instalando ulititários de áudio${_o}"; sleep 1
 	# pacman -S alsa-utils pulseaudio --noconfirm
 	pacman -S pipewire pipewire-pulse pipewire-alsa pipewire-jack --noconfirm
 	
 	# network
-	echo -e "${_g}==> Instalando utilitários de rede${_e}"; sleep 1
+	echo -e "${_g}==> Instalando utilitários de rede${_o}"; sleep 1
 	pacman -S networkmanager network-manager-applet --noconfirm
 
 	# criar diretórios
-	echo -e "${_g}==> Criando diretórios${_e}"; sleep 1
+	echo -e "${_g}==> Criando diretórios${_o}"; sleep 1
 	pacman -S xdg-user-dirs --noconfirm && xdg-user-dirs-update
 
 	# iniciar i3
-	echo -e "${_g}==> Configurando pra iniciar o i3${_e}"; sleep 1
+	echo -e "${_g}==> Configurando pra iniciar o i3${_o}"; sleep 1
 	echo 'exec i3' > /home/${_user}/.xinitrc
 
 	# keyboard X11 br abnt2
-	echo -e "${_g}==> Setando keymap br abnt2 no ambiente X11${_e}"; sleep 1
+	echo -e "${_g}==> Setando keymap br abnt2 no ambiente X11${_o}"; sleep 1
 	localectl set-x11-keymap br abnt2
 
 	# keyboard
-	echo -e "${_g}==> Criando arquivo de configuração para keyboard br abnt${_e}"; sleep 1
+	echo -e "${_g}==> Criando arquivo de configuração para keyboard br abnt${_o}"; sleep 1
 	curl -s -o /etc/X11/xorg.conf.d/10-evdev.conf 'https://raw.githubusercontent.com/leoarch/arch/master/xfce/config/keyboard'
 
 	# configurando e instalando lightdm
-	echo -e "${_g}==> Instalando e configurando gerenciador de login lightdm${_e}"; sleep 1
+	echo -e "${_g}==> Instalando e configurando gerenciador de login lightdm${_o}"; sleep 1
 	pacman -S lightdm lightdm-gtk-greeter --noconfirm
 	echo -e "${_g}==> Configurando gerenciador de login lightdm${_o}"; sleep 1
 	sed -i 's/^#greeter-session.*/greeter-session=lightdm-gtk-greeter/' /etc/lightdm/lightdm.conf
@@ -128,18 +134,18 @@ if [[ "$_i3" == @(S|s) ]]; then
 	echo -e "[greeter]\nbackground=/usr/share/pixmaps/arch-01.jpg" > /etc/lightdm/lightdm-gtk-greeter.conf
 
 	# enable services
-	echo -e "${_g}==> Habilitando serviços para serem iniciados com o sistema${_e}"; sleep 1
+	echo -e "${_g}==> Habilitando serviços para serem iniciados com o sistema${_o}"; sleep 1
 	systemctl enable lightdm && systemctl enable NetworkManager
 fi
 
 # grub configuration
 if [[ "$_uefi" != "" ]]; then
-	echo -e "${_g}==> bootctl UEFI mode${_o}"
+	echo -e "${_g}==> bootctl UEFI mode${_o}"; sleep 1
 	bootctl --path=/boot install
 	echo -e "default arch\ntimeout 3\n" > /boot/loader/loader.conf
 	echo -e "title Arch Linux\nlinux /vmlinuz-linux\ninitrd /initramfs-linux.img\noptions root=${_root} rw\n" > /boot/loader/entries/arch.conf
 else
-	echo -e "${_g}==> Instalando e Configurando o GRUB${_o}"
+	echo -e "${_g}==> Instalando e Configurando o GRUB${_o}"; sleep 1
 	pacman -S grub --noconfirm
 	# dual boot
 	# [[ "$_dualboot" == "s" ]] && { pacman -S os-prober --noconfirm; }
@@ -152,7 +158,7 @@ if [[ "$_notebook" == "s" ]]; then
 	echo -e "${_g}==> Instalando drivers para notebook${_o}"; sleep 1
 	pacman -S netctl wireless_tools wpa_supplicant acpi acpid xf86-input-synaptics xf86-input-libinput --noconfirm # remove the repository (wpa_actiond)
 	
-	echo -e "${_g}==> Configurando tap-to-click${_e}"; sleep 1
+	echo -e "${_g}==> Configurando tap-to-click${_o}"; sleep 1
 	curl -s -o /etc/X11/xorg.conf.d/30-touchpad.conf 'https://raw.githubusercontent.com/leoarch/arch/master/xfce/config/touchpad'
 fi
 
