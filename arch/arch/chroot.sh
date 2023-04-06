@@ -87,7 +87,7 @@ if [[ "$_i3" == @(S|s) ]]; then
 	pacman -S i3-wm xorg xorg-xinit xorg-server xf86-video-vesa --noconfirm
 	
 	echo -e "${_g}==> Pacotes essenciais${_e}"; sleep 1
-	pacman -S ttf-dejavu terminus-font alacritty gvfs feh qalculate-gtk dmenu zip unzip unrar ntfs-3g --noconfirm
+	pacman -S ttf-dejavu terminus-font alacritty gvfs feh qalculate-gtk dmenu zip unzip unrar ntfs-3g thunar flatpak git flameshot geany --noconfirm
 	
 	# firefox
 	echo -e "${_g}==> Instalando firefox${_e}"; sleep 1
