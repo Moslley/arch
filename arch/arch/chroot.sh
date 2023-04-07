@@ -80,7 +80,7 @@ fi
 
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
-	pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd --noconfirm
+	pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd gnome-weather --noconfirm
 	pacman -S neofetch flatpak firefox firefox-i18n-pt-br chromium wine --noconfirm
 	
 	# create directories
