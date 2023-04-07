@@ -82,6 +82,11 @@ fi
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
 	pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd --noconfirm
+	
+	# create directories
+	echo -e "${_g}==> Criando diretórios${_o}"; sleep 1
+	pacman -S xdg-user-dirs --noconfirm && xdg-user-dirs-update
+	
 	# enable services
 	echo -e "${_g}===> Habilitando NetworkManager e GDM${_o}"; sleep 1
 	systemctl enable NetworkManager && systemctl enable gdm
