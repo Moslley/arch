@@ -95,7 +95,7 @@ fi
 # install i3wm
 if [[ "$_i3" == @(S|s) ]]; then
 	echo -e "${_g}==> Instaçando i3wm e xorg${_o}"; sleep 1
-	pacman -S i3-wm xorg xorg-xinit xorg-server xf86-video-vesa arandr --noconfirm
+	pacman -S i3-wm i3status xorg xorg-xinit xorg-server xf86-video-vesa arandr --noconfirm
 	
 	echo -e "${_g}==> Pacotes essenciais${_o}"; sleep 1
 	pacman -S ttf-dejavu terminus-font alacritty gvfs feh qalculate-gtk dmenu zip unzip unrar ntfs-3g thunar flatpak git flameshot geany --noconfirm
