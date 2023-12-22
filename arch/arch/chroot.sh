@@ -80,8 +80,11 @@ fi
 
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
-	pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd gnome-weather xdg-desktop-portal-gnome --noconfirm
-	pacman -S neofetch flatpak firefox firefox-i18n-pt-br chromium wine file-roller --noconfirm
+	# gnome
+	pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd gnome-weather xdg-desktop-portal-gnome endeavour gnome-themes-extra --noconfirm
+	
+ 	# utilities
+ 	pacman -S neofetch htop btop flatpak firefox-i18n-pt-br file-roller transmission-gtk git virtualbox linux-hearders --noconfirm
 	
 	# create directories
 	echo -e "${_g}==> Criando diretórios${_o}"; sleep 1
