@@ -5,7 +5,7 @@
 # ==> Descrição: executa arch-chroot
 
 # variables user and pass root/user
-_user="arch"
+# _user="arch"
 _proot="123"
 _puser="123"
 
@@ -86,7 +86,7 @@ if [[ "$_gnome" == @(S|s) ]]; then
 	
  	# utilities
   	echo -e "${_g}===> Instalando utilitários${_o}"; sleep 1
- 	pacman -S htop btop unrar zip unzip flatpak firefox-i18n-pt-br transmission-gtk git base-devel --noconfirm
+ 	pacman -S htop btop unrar zip unzip flatpak firefox-i18n-pt-br transmission-gtk git yt-dlp ffmpeg base-devel --noconfirm
   
 	if [[ "$_vb" == @(S|s) ]]; then
 	 	echo -e "${_g}===> Instalando virtual-box e headers${_o}"; sleep 1
