@@ -51,7 +51,13 @@ echo -e "\n${_g} Logo acima estão listados os seus discos${_o}"
 echo -en "\n${_g} Informe o nome do seu disco onde estará a raíz /${_o} (Ex: ${_r}sda${_o}):${_w} "; read _disk; export _disk
 echo -en "\n${_g} Informe o nome do seu disco onde estará a home /home (deixe em branco para não usar)${_o} (Ex: ${_r}sdb${_o}):${_w} "; read _diskhome; export _diskhome
 _hd="/dev/${_disk}"; export _hd
-_hd2="/dev/${_diskhome}"; export _hd2
+
+# check exist /home
+if [[ "$_diskhome" != "" ]]; then
+	_hd2="/dev/${_diskhome}"; export _hd2
+else
+	_hd2 = "";
+fi
 
 # Disco /
 cfdisk $_hd # start partition with cfdisk
