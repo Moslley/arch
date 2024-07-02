@@ -48,14 +48,20 @@ echo
 lsblk -l | grep disk # list disk
 
 echo -e "\n${_g} Logo acima estão listados os seus discos${_o}"
-echo -en "\n${_g} Informe o nome do seu disco${_o} (Ex: ${_r}sda${_o}):${_w} "; read _disk; export _disk
+echo -en "\n${_g} Informe o nome do seu disco onde estará a raíz /${_o} (Ex: ${_r}sda${_o}):${_w} "; read _disk; export _disk
+echo -en "\n${_g} Informe o nome do seu disco onde estará a home /home (deixe em branco para não usar)${_o} (Ex: ${_r}sdb${_o}):${_w} "; read _diskhome; export _diskhome
 _hd="/dev/${_disk}"; export _hd
+_hd2="/dev/${_diskhome}"; export _hd2
 
-echo
-
+# Disco /
 cfdisk $_hd # start partition with cfdisk
-
 [ $? -ne 0 ] && { echo -e "\n${_r} ATENÇÃO:${_o} Disco ${_am}$_hd${_o} não existe! Execute novamente o script e insira o número corretamente.\n"; exit 1; }
+
+if [[ "$_hd2" != "" ]]; then
+	# Disco /home
+	cfdisk $_hd2 # start partition with cfdisk
+	[ $? -ne 0 ] && { echo -e "\n${_r} ATENÇÃO:${_o} Disco ${_am}$_hd2${_o} não existe! Execute novamente o script e insira o número corretamente.\n"; exit 1; }
+fi
 
 tput reset; setterm -cursor off
 
@@ -64,20 +70,23 @@ echo -e "\n${_n} Use os número das partições nas perguntas abaixo${_w}\n"
 
 echo "==========================================================="
 fdisk -l $_hd
+if [[ "$_hd2" != "" ]]; then
+	fdisk -l $_hd2
+fi
 echo "==========================================================="
 
 echo -e "\n${_n} CONSULTE ACIMA O NÚMERO DAS SUAS PARTIÇÕES${_o}"
 
-echo -en "\n ${_p}Digite o número da partição${_o} ${_g}UEFI${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _uefi
-echo -en "\n ${_p}Digite o número da partição${_o} ${_g}SWAP${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _swap
-echo -en "\n ${_p}Digite o número da partição${_o} ${_g}RAÍZ /${_o}${_am} (Partição OBRIGATÓRIA!)${_o}:${_w} "		 ; read  _root
+echo -en "\n ${_p}Digite a partição${_o} ${_g}UEFI${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _uefi
+echo -en "\n ${_p}Digite a partição${_o} ${_g}SWAP${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _swap
+echo -en "\n${_p} Digite a partição${_o} ${_g}HOME${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _home
+echo -en "\n ${_p}Digite a partição${_o} ${_g}RAÍZ /${_o}${_am} (Partição OBRIGATÓRIA!)${_o}:${_w} "; read  _root
 [ "$_root" == "" ] && { echo -e "\n${_am}Atenção:${_o} ${_p}Partição RAÍZ é obrigatória! Execute novamente o script e digite o número correto!\n${_o}"; exit 1; }
-echo -en "\n${_p} Digite o número da partição${_o} ${_g}HOME${_o} ou tecle ${_am}ENTER${_o} caso não tenha:${_w} "; read _home
 
-_root="/dev/${_disk}${_root}"; export _root
-[ -n "$_uefi" ] && { _uefi="/dev/${_disk}${_uefi}"; export _uefi; }
-[ -n "$_swap" ] && { _swap="/dev/${_disk}${_swap}"; export _swap; }
-[ -n "$_home" ] && { _home="/dev/${_disk}${_home}"; export _home; }
+_root="/dev/${_root}"; export _root
+[ -n "$_uefi" ] && { _uefi="/dev/${_uefi}"; export _uefi; }
+[ -n "$_swap" ] && { _swap="/dev/${_swap}"; export _swap; }
+[ -n "$_home" ] && { _home="/dev/${_home}"; export _home; }
 
 echo
 
@@ -162,6 +171,9 @@ echo
 
 echo "==========================================================="
 fdisk -l $_hd
+if [[ "$_hd2" != "" ]]; then
+	fdisk -l $_hd2
+fi
 echo "==========================================================="
 
 echo -e "\n Verifique se as informações estão corretas comparando com os dados acima."
