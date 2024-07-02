@@ -86,7 +86,7 @@ if [[ "$_gnome" == @(S|s) ]]; then
 	
  	# utilities
   	echo -e "${_g}===> Instalando utilitários${_o}"; sleep 1
- 	pacman -S htop btop unrar zip unzip flatpak firefox-i18n-pt-br transmission-gtk git --noconfirm
+ 	pacman -S htop btop unrar zip unzip flatpak firefox-i18n-pt-br transmission-gtk git base-devel --noconfirm
   
 	if [[ "$_vb" == @(S|s) ]]; then
 	 	echo -e "${_g}===> Instalando virtual-box e headers${_o}"; sleep 1
