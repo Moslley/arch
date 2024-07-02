@@ -5,7 +5,7 @@
 # ==> Descrição: executa arch-chroot
 
 # variables user and pass root/user
-_user="leo"
+_user="arch"
 _proot="123"
 _puser="123"
 
@@ -81,11 +81,18 @@ fi
 # install gnome
 if [[ "$_gnome" == @(S|s) ]]; then
 	# gnome
-	pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g unrar zip unzip gnome-calculator eog networkmanager gnome-keyring iwd gnome-weather xdg-desktop-portal-gnome endeavour gnome-themes-extra --noconfirm
+ 	echo -e "${_g}===> Instalando pacotes GNOME${_o}"; sleep 1
+	pacman -S gnome-shell gnome-console gnome-control-center gnome-tweaks gdm nautilus gnome-disk-utility gnome-backgrounds gnome-font-viewer gnome-system-monitor gnome-calendar ntfs-3g gnome-calculator loupe gnome-keyring gnome-weather xdg-desktop-portal-gnome gnome-themes-extra epiphany file-roller networkmanager --noconfirm
 	
  	# utilities
- 	pacman -S neofetch htop btop flatpak firefox-i18n-pt-br file-roller transmission-gtk git virtualbox linux-hearders --noconfirm
-	
+  	echo -e "${_g}===> Instalando utilitários${_o}"; sleep 1
+ 	pacman -S htop btop unrar zip unzip flatpak firefox-i18n-pt-br transmission-gtk git --noconfirm
+  
+	if [[ "$_vb" == @(S|s) ]]; then
+	 	echo -e "${_g}===> Instalando virtual-box e headers${_o}"; sleep 1
+	  	pacman -S virtualbox linux-headers --noconfirm
+	fi
+  
 	# create directories
 	echo -e "${_g}==> Criando diretórios${_o}"; sleep 1
 	pacman -S xdg-user-dirs --noconfirm && xdg-user-dirs-update
