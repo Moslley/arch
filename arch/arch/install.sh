@@ -173,7 +173,7 @@ else
 	echo -e " ${_g}NOTEBOOK${_o} = NAO"
 fi
 
-echo -e " ${_g}GRUB instalado em${_o} = ${_hd}"
+echo -e " ${_g}GRUB INSTALL${_o} = ${_hd}"
 
 echo
 
