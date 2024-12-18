@@ -164,7 +164,7 @@ else
 	pacman -S grub --noconfirm
 	# dual boot
 	# [[ "$_dualboot" == "s" ]] && { pacman -S os-prober --noconfirm; }
-	grub-install --target=i386-pc --recheck /dev/${_disk}
+	grub-install --target=i386-pc --recheck ${_hd}
 	# cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 	grub-mkconfig -o /boot/grub/grub.cfg
 fi
